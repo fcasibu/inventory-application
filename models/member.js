@@ -14,6 +14,8 @@ const MemberSchema = new mongoose.Schema({
   }
 });
 
-MemberSchema.virtual('url').get(() => `/clubs/${this.club._id}/members/${this._id}`);
+MemberSchema.virtual('url').get(function () {
+  return `/clubs/${this.club._id}/members/${this._id}`;
+});
 
 module.exports = mongoose.model('Member', MemberSchema);

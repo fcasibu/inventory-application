@@ -19,6 +19,8 @@ const ChapterSchema = new mongoose.Schema({
   }
 });
 
-ChapterSchema.virtual('url').get(() => `/books/${this.book._id}/chapters/${this._id}`);
+ChapterSchema.virtual('url').get(function () {
+  return `/books/${this.book._id}/chapters/${this._id}`;
+});
 
 module.exports = mongoose.model('Chapter', ChapterSchema);

@@ -9,6 +9,8 @@ const TagSchema = new mongoose.Schema({
   }
 });
 
-TagSchema.virtual('url').get(() => `/tags/${this._id}`);
+TagSchema.virtual('url').get(function () {
+  return `/tags/${this._id}`;
+});
 
 module.exports = mongoose.model('Tag', TagSchema);

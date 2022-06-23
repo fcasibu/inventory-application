@@ -18,6 +18,8 @@ const CommentSchema = new mongoose.Schema({
   }
 });
 
-CommentSchema.virtual('url').get(() => `/books/${this.book._id}/comment/${this._id}`);
+CommentSchema.virtual('url').get(function () {
+  return `/books/${this.book._id}/comment/${this._id}`;
+});
 
 module.exports = mongoose.model('Comment', CommentSchema);

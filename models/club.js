@@ -14,6 +14,8 @@ const ClubSchema = new mongoose.Schema({
   }
 });
 
-ClubSchema.virtual('url').get(() => `/clubs/${this._id}`);
+ClubSchema.virtual('url').get(function () {
+  return `/clubs/${this._id}`;
+});
 
 module.exports = mongoose.model('Club', ClubSchema);

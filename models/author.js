@@ -13,6 +13,8 @@ const AuthorSchema = new mongoose.Schema({
   }
 });
 
-AuthorSchema.virtual('url').get(() => `/authors/${this._id}`);
+AuthorSchema.virtual('url').get(function () {
+  return `/authors/${this._id}`;
+});
 
 module.exports = mongoose.model('Author', AuthorSchema);

@@ -28,6 +28,10 @@ const BookSchema = new mongoose.Schema({
     min: 1,
     max: 99
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   genre: [
     {
       type: mongoose.Schema.Types.ObjectId,

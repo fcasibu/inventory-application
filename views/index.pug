@@ -1,10 +1,38 @@
 extends layout
 
 block content
-  h1 head 1
-  h2 head 2
-  h3 head 3
-  h4 head 4
-  h5 head 5
-  h6 head 6
-  p Welcome to #{title}
+  div.hero 
+    div.hero__left
+      div.hero__info
+        h1.hero__title Read, Create, and Build a Community!
+        p.hero__description Share your creative works to everyone, and get paid by doing so! Build a community out of it and have fun reading together!
+      div.hero__buttons
+        a.btn.btn__primary(href='/create') Create
+        a.btn.btn__transparent(href='/books') Browse
+    div.hero__right
+      img(src='/public/images/reading_hero.png')
+  section.new-releases
+    h5 New Releases
+    if book_list
+      div.books
+        each book in book_list
+          div(id=book._id).book
+            div.book__image-container
+              img(src=book.photoURL)
+            div.book__top
+              div
+                p= book.author.name
+              div
+                i.fa-regular.fa-money-bill-1
+                p #{book.price}$
+            div.book__body
+              h5= book.title
+            div.book__bottom
+              if book.chapter_count
+                i.fa-solid.fa-book
+                p #{book.chapter_count} #{book.chapter_count > 1 ? 'Chapters' : 'Chapter'}
+              else
+                i.fa-solid.fa-book
+                p 0 Chapter
+    else 
+      h6 No books available

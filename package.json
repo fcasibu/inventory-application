@@ -7,6 +7,7 @@
     "sass:compile": "node-sass --include-path sass ./scss/index.scss ./public/stylesheets/style.css"
   },
   "dependencies": {
+    "async": "^3.2.4",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

@@ -18,15 +18,18 @@ block content
         each book in book_list
           div(id=book._id).book
             div.book__image-container
-              img(src=book.photoURL)
+              a(href=book.url)
+                img(src=book.photoURL)
             div.book__top
               div
-                p= book.author.name
+                a(href=book.author.url)
+                  p= book.author.name
               div
                 i.fa-regular.fa-money-bill-1
                 p #{book.price}$
             div.book__body
-              h5= book.title
+              a(href=book.url)
+                h5= book.title
             div.book__bottom
               if book.chapter_count
                 i.fa-solid.fa-book

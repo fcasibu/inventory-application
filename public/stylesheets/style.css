@@ -83,13 +83,21 @@ body {
   font-size: 24px;
   padding: 1rem;
   border-radius: 0.375rem;
-  cursor: pointer; }
+  outline: 2px solid #2945ff;
+  cursor: pointer;
+  transition: all 200ms ease-in-out; }
   .btn__primary {
     background: #2945ff;
     color: white; }
+    .btn__primary:hover {
+      background: none;
+      outline: 2px solid #2945ff;
+      color: #000000; }
   .btn__transparent {
-    border: 2px solid #2945ff;
     color: #000000; }
+    .btn__transparent:hover {
+      background: #2945ff;
+      color: white; }
 
 .header {
   display: flex;
@@ -110,6 +118,8 @@ body {
       gap: 4rem; }
     .header__navigation .link {
       font-size: 14px; }
+      .header__navigation .link a:hover {
+        color: #2945ff; }
 
 .hero {
   display: flex;

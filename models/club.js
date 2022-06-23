@@ -11,13 +11,7 @@ const ClubSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book',
     required: true
-  },
-  member: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Member'
-    }
-  ]
+  }
 });
 
 ClubSchema.virtual('url').get(() => `/clubs/${this._id}`);

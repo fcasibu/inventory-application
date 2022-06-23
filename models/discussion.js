@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CommentSchema = new mongoose.Schema({
+const DiscussionSchema = new mongoose.Schema({
   comment: {
     type: String,
     minLength: [3, 'A comment must have a minimum length of 3 characters'],
@@ -12,4 +12,4 @@ const CommentSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Comment', CommentSchema);
+module.exports = mongoose.model('Discussion', DiscussionSchema);

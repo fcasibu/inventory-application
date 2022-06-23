@@ -16,16 +16,16 @@ exports.index = async (req, res, next) => {
       return res.render('index', { book_list: books });
     }
 
-    for (let i = 0; i < books.length; i += 1) {
+    for (let i = 0; i < books.length; i++) {
       let count = 0;
-      for (let j = 0; j < chapters.length; j += 1) {
+      for (let j = 0; j < chapters.length; j++) {
         if (chapters[j].book._id.equals(books[i]._id)) {
           books[i].chapter_count = `${++count}`;
-          console.log(books[i].chapter_count);
         }
       }
     }
-    res.render('index', { book_list: books, chapter_list: chapters });
+
+    res.render('index', { book_list: books });
   } catch (err) {
     next(err);
   }

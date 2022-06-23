@@ -7,6 +7,12 @@ const BookSchema = new mongoose.Schema({
     minLength: [3, 'A title must have a mininum length of 3 characters'],
     maxLength: [20, 'A title must not exceed 20 characters']
   },
+  summary: {
+    type: String,
+    required: [true, 'A summary is required'],
+    minLength: [3, 'A summary must have a minimum length of 3 characters'],
+    maxLengtH: [200, 'A summary must not exceed 200 characters']
+  },
   photoURL: {
     type: String,
     default: ''
@@ -22,18 +28,6 @@ const BookSchema = new mongoose.Schema({
     min: 1,
     max: 99
   },
-  comment: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comment'
-    }
-  ],
-  chapter: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Chapter'
-    }
-  ],
   genre: [
     {
       type: mongoose.Schema.Types.ObjectId,

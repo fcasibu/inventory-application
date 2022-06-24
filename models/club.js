@@ -18,4 +18,11 @@ ClubSchema.virtual('url').get(function () {
   return `/clubs/${this._id}`;
 });
 
+ClubSchema.virtual('member_count', {
+  ref: 'Member',
+  localField: '_id',
+  foreignField: 'club',
+  count: true
+});
+
 module.exports = mongoose.model('Club', ClubSchema);

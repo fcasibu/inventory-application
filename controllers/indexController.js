@@ -6,6 +6,7 @@ exports.index = async (req, res, next) => {
     const books = await Book.find()
       .populate('author')
       .populate('chapter_count')
+      .sort('createdAt')
       .limit(4);
 
     if (books.length <= 0) {

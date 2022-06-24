@@ -50,4 +50,18 @@ BookSchema.virtual('url').get(function () {
   return `/books/${this._id}`;
 });
 
+BookSchema.virtual('comment_count', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'book',
+  count: true
+});
+
+BookSchema.virtual('chapter_count', {
+  ref: 'Chapter',
+  localField: '_id',
+  foreignField: 'book',
+  count: true
+});
+
 module.exports = mongoose.model('Book', BookSchema);

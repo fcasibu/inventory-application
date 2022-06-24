@@ -20,6 +20,7 @@ const db = mongoose.connection;
 db.on('error', () => console.error('ERROR CONNECTING TO MONGODB'));
 
 const indexRouter = require('./routes/index');
+const bookRouter = require('./routes/book');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/books', bookRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

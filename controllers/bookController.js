@@ -8,7 +8,10 @@ exports.book_list_get = async (req, res, next) => {
     .populate('author')
     .populate('genre')
     .populate('comment_count')
-    .populate('chapter_count');
+    .populate('chapter_count')
+    .populate('comment_list')
+    .limit(30);
+
   if (!books.length) return res.render('book_list');
   res.render('book_list', { books });
 };

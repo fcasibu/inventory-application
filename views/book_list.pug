@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  main
+    div.browse-by
+      h4 Browse by
+      div.browse-by__buttons
+        a.btn.btn__primary(href='/genres') Tags
+        a.btn.btn__primary(href='/tags') Genres
+    section.book-cards
+      if books
+        each book in books
+          div.card
+            div.card__image-container
+              a(href=book.url)
+                img(src=book.photoURL)
+            div.card__body
+              div.card__body-head
+                a(href=book.url)
+                  h5= book.title
+                a(href=book.author.url)
+                  p= book.author.name
+              div.card__body-stats
+                div
+                  i.fa-solid.fa-book
+                  if book.chapter_count
+                    p #{book.chapter_count} #{book.chapter_count > 1 ? 'Chapters' : 'Chapter'}
+                  else 
+                    p 0 chapter
+                div
+                  i.fa-solid.fa-comment
+                  if book.comment_count
+                    p #{book.comment_count} #{book.comment_count > 1 ? 'Comments' : 'Comment'}
+                  else
+                    p 0 Comment
+                div
+                  i.fa-regular.fa-money-bill-1
+                  p #{book.price}$
+              div.card__body-description
+                p= book.summary
+              div.card__body-genres
+                if book.genre
+                  each genre in book.genre
+                    div
+                      a(href=genre.url)
+                        p= genre.name
+      else       
+        h6(style='text-align: center; margin-top: 2rem') No books available

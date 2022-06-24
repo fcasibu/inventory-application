@@ -25,4 +25,10 @@ ClubSchema.virtual('member_count', {
   count: true
 });
 
+ClubSchema.virtual('member_list', {
+  ref: 'Member',
+  localField: '_id',
+  foreignField: 'club'
+});
+
 module.exports = mongoose.model('Club', ClubSchema);

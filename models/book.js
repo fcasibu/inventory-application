@@ -15,7 +15,7 @@ const BookSchema = new mongoose.Schema({
   },
   photoURL: {
     type: String,
-    default: ''
+    default: 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg'
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -48,6 +48,18 @@ const BookSchema = new mongoose.Schema({
 
 BookSchema.virtual('url').get(function () {
   return `/books/${this._id}`;
+});
+
+BookSchema.virtual('comment_list', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'book'
+});
+
+BookSchema.virtual('chapter_list', {
+  ref: 'Chapter',
+  localField: '_id',
+  foreignField: 'book'
 });
 
 BookSchema.virtual('comment_count', {

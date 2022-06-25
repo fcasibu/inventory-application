@@ -1,0 +1,43 @@
+extends layout 
+
+block content
+  section.book-detail-section(style='margin-top: 0')
+    div.book-detail
+      div.book-detail__image-container
+        img(src=book.photoURL)
+      div.book-detail__info
+        h5= book.title
+        div.chapter-count
+          if book.chapter_count
+            i.fa-solid.fa-book
+            p #{book.chapter_count} #{book.chapter_count > 1 ? 'Chapters' : 'Chapter'}
+          else
+            i.fa-solid.fa-book
+            p 0 Chapter
+        div.book-info
+          h6 Author: #[a(href=book.author.url) #{book.author.name}]
+          h6 Genre: #[span #{book.genre_list.length > 0 ? book.genre_list : 'N/A'}]
+          h6 Tags: #[span #{book.tag_list.length > 0 ? book.tag_list : 'N/A'}]
+        div.buttons
+          a.btn.btn__primary(href=`/books/${book._id}/comments`) Check comments
+          a.btn.btn__primary Get full access
+    div.book-summary
+      h5 Summary
+      p= book.summary
+    div.book-content
+      h5 Chapters
+      div.book-content__chapters
+        if book.chapter_list.length > 0
+          each chapter, index in book.chapter_list
+            a(href=chapter.url)
+              div.chapter-count
+                p= index + 1
+              div.chapter-info
+                h6= chapter.title
+                p= chapter.createdAt_formatted
+        else
+          p No available chapters
+
+
+
+              

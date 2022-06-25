@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  h4= title
+  if errors
+    ul
+    each error in errors
+      li.error-msg= error.msg
+  section(style='margin-top: 0')
+    form.form-book(action='' method='POST')
+      div.form-control-book-left
+        label.form-control-book
+          p Title
+          input(type='text' name='title' id='title' placeholder='Stellar Transformations' value=(book===undefined ? '' : book.title) minLength='0' maxLength='70')
+        label.form-control-book
+          p Author
+          select(name='author' required)
+            each author in authors
+              if book
+                option(value=author._id selected=(author._id.toString() === book.author._id.toString() ? 'selected' : false)) #{author.name}
+              else
+                option(value=author._id) #{author.name}
+        label.form-control-book
+          p Image
+          input(type='text' name='photoURL' placeholder='https://example.com' value=(book===undefined ? '' : book.photoURL))
+        label.form-control-book
+          p Price
+          input(type='number' name='price' placeholder='30' value=(book===undefined ? 1 : book.price) min=1 max=30)
+        label.form-control-book
+          p Genre(s)
+          if genres.length <= 0
+            p(style='color: #333333; font-size: 16px') No available Genres
+          div.checkboxes
+            each genre in genres
+              input(type='checkbox' name='genre' value=genre._id checked=genre.checked)
+              span= genre.name
+        label.form-control-book
+          p Tag(s)
+          if genres.length <= 0
+            p(style='color: #333333; font-size: 16px') No avaiable Tags
+          div.checkboxes
+            each tag in tags
+              input(type='checkbox' name='tag' value=tag._id checked=tag.checked)
+              span= tag.name
+      div.form-control-book-right
+        label.form-control-book
+          p Summary
+          textarea(name='summary' placeholder='The book tells the story of a young...' minLength='3' maxLength='1000') #{book===undefined ? '' : book.summary}
+        button.btn.btn__primary(type='submit') Create
+         
+

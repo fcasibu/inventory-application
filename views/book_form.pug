@@ -2,16 +2,16 @@ extends layout
 
 block content
   h4= title
-  if errors
-    ul
-    each error in errors
-      li.error-msg= error.msg
   section(style='margin-top: 0')
     form.form-book(action='' method='POST')
       div.form-control-book-left
         label.form-control-book
           p Title
-          input(type='text' name='title' id='title' placeholder='Stellar Transformations' value=(book===undefined ? '' : book.title) minLength='0' maxLength='70')
+          input(type='text' name='title' id='title' placeholder='Stellar Transformations' value=(book===undefined ? '' : book.title) maxLength='70')
+          if errors
+            - var error = errors.find(err => err.param === 'title')
+          if error
+            p.error-message= error.msg
         label.form-control-book
           p Author
           select(name='author' required)
@@ -27,7 +27,7 @@ block content
           p Price
           input(type='number' name='price' placeholder='30' value=(book===undefined ? 1 : book.price) min=1 max=30)
         label.form-control-book
-          p Genre(s)
+          p Genre(s) 
           if genres.length <= 0
             p(style='color: #333333; font-size: 16px') No available Genres
           div.checkboxes
@@ -45,7 +45,12 @@ block content
       div.form-control-book-right
         label.form-control-book
           p Summary
-          textarea(name='summary' placeholder='The book tells the story of a young...' minLength='3' maxLength='1000') #{book===undefined ? '' : book.summary}
+          textarea(name='summary' placeholder='The book tells the story of a young...' maxLength='1000') #{book===undefined ? '' : book.summary}
+          if errors
+            - var error = errors.find(err => err.param === 'summary')
+          if error
+            p.error-message= error.msg
+
         button.btn.btn__primary(type='submit') Create
          
 

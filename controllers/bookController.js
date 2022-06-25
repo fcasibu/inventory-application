@@ -1,4 +1,5 @@
 const { body, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 const Book = require('../models/book');
 const Chapter = require('../models/chapter');
 const Comment = require('../models/comment');
@@ -12,6 +13,7 @@ exports.book_list_get = async (req, res, next) => {
     .populate({ path: 'genre', options: { limit: 3 } })
     .populate('comment_count')
     .populate('chapter_count')
+    .populate('chapter_list')
     .limit(30);
 
   if (!books.length) return res.render('book_list');
@@ -19,7 +21,18 @@ exports.book_list_get = async (req, res, next) => {
 };
 
 exports.book_detail_get = async (req, res, next) => {
-  res.send('Not yet implemnted');
+  try {
+    const book = await Book.findById(req.params.bookId)
+      .populate('author')
+      .populate('genre', 'name')
+      .populate('tag', 'name')
+      .populate('chapter_count')
+      .populate('chapter_list');
+
+    res.render('book_detail', { book });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.book_create_get = async (req, res, next) => {
@@ -78,7 +91,6 @@ exports.book_create_post = [
         const author = Author.find();
         const genre = Genre.find();
         const tag = Tag.find();
-
         const [authors, genres, tags] = await Promise.all([author, genre, tag]);
 
         for (let i = 0; i < genres.length; i++) {

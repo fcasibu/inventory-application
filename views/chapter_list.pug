@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  div.book-content
+    h5 Chapters
+    div.book-content__chapters
+      if chapters.length > 0
+        each chapter, index in chapters
+          a(href=`/books/${bookId}/chapters?page=${index + 1}`)
+            div.chapter-count
+              p= index + 1
+            div.chapter-info
+              h6= chapter.title
+              p= chapter.createdAt_formatted
+      else
+        p No available chapters

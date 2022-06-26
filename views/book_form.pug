@@ -7,11 +7,11 @@ block content
       div.form-control-book-left
         label.form-control-book
           p Title
-          input(type='text' name='title' id='title' placeholder='Stellar Transformations' value=(book===undefined ? '' : book.title) maxLength='70')
+          input(type='text' name='title' placeholder='Stellar Transformations' value=(book===undefined ? '' : book.title) maxLength='70')
           if errors
             - var error = errors.find(err => err.param === 'title')
-          if error
-            p.error-message= error.msg
+            if error
+              p.error-message= error.msg
         label.form-control-book
           p Author
           select(name='author' required)
@@ -26,7 +26,7 @@ block content
         label.form-control-book
           p Price
           input(type='number' name='price' placeholder='30' value=(book===undefined ? 1 : book.price) min=1 max=30)
-        label.form-control-book
+        div.form-control-book
           p Genre(s) 
           if genres.length <= 0
             p(style='color: #333333; font-size: 16px') No available Genres
@@ -34,10 +34,10 @@ block content
             each genre in genres
               input(type='checkbox' name='genre' value=genre._id checked=genre.checked)
               span= genre.name
-        label.form-control-book
+        div.form-control-book
           p Tag(s)
           if genres.length <= 0
-            p(style='color: #333333; font-size: 16px') No avaiable Tags
+            p(style='color: #333333; font-size: 16px') No available Tags
           div.checkboxes
             each tag in tags
               input(type='checkbox' name='tag' value=tag._id checked=tag.checked)
@@ -48,9 +48,14 @@ block content
           textarea(name='summary' placeholder='The book tells the story of a young...' maxLength='1000') #{book===undefined ? '' : book.summary}
           if errors
             - var error = errors.find(err => err.param === 'summary')
-          if error
-            p.error-message= error.msg
+            if error
+              p.error-message= error.msg
+        label.form-control-book
+          p Admin Password
+          input(type='password' name='password')
+          if invalidPass
+            p.error-message= invalidPass.msg
 
-        button.btn.btn__primary(type='submit') Create
+        button.btn.btn__primary(type='submit') Submit
          
 

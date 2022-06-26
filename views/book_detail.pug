@@ -37,6 +37,8 @@ block content
                 p= chapter.createdAt_formatted
         else
           p No available chapters
+    div.book-delete
+      a.btn.btn__danger(href=`${book.url}/delete`) Delete Book
 
 
 

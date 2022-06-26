@@ -81,24 +81,25 @@ body {
   padding: 1rem;
   border: 0;
   border-radius: 0.3rem;
-  outline: 2px solid #2945ff;
   cursor: pointer;
   transition: all 100ms ease-in-out; }
   .btn__primary {
     background: #2945ff;
+    outline: 2px solid #2945ff;
     color: white; }
     .btn__primary:hover {
       background: none;
-      outline: 2px solid #2945ff;
       color: #000000; }
   .btn__transparent {
-    color: #000000; }
+    color: #000000;
+    outline: 2px solid #2945ff; }
     .btn__transparent:hover {
       background: #2945ff;
       color: white; }
   .btn__danger {
     background: #ff2929;
-    color: white; }
+    color: white;
+    outline: 2px solid #ff2929; }
 
 .header {
   display: flex;
@@ -325,6 +326,7 @@ body {
   gap: 0.5rem; }
 
 .form-control-book input[type='text'],
+.form-control-book input[type='password'],
 .form-control-book input[type='number'],
 .form-control-book select,
 .form-control-book textarea {
@@ -367,18 +369,28 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem; }
+  @media (min-width: 64em) {
+    .book-detail {
+      flex-direction: row; } }
   .book-detail__image-container {
     border-radius: 0.375rem;
     overflow: hidden; }
+    @media (min-width: 64em) {
+      .book-detail__image-container {
+        max-width: 200px;
+        width: 200px; } }
     .book-detail__image-container img {
-      width: 500px;
-      height: 250px;
+      width: 100%;
+      height: 15.625rem;
       object-fit: cover;
       object-position: 0 top; }
   .book-detail__info {
     display: flex;
     flex-direction: column;
     gap: 0.5rem; }
+    @media (min-width: 64em) {
+      .book-detail__info {
+        flex: 1; } }
     .book-detail__info .chapter-count {
       display: flex;
       align-items: center;
@@ -394,19 +406,27 @@ body {
       font-size: 16px;
       font-weight: 400; }
     .book-detail__info .buttons {
+      flex: 1;
       display: flex;
       gap: 1rem; }
       .book-detail__info .buttons a {
+        align-self: flex-end;
         font-size: 16px;
         padding: 0.5rem 1.5rem; }
 
 .book-summary p {
   font-size: 15px;
   white-space: pre-wrap; }
+  @media (min-width: 64em) {
+    .book-summary p {
+      font-size: 16px; } }
 
 .book-content__chapters {
   display: flex;
   flex-direction: column; }
+  @media (min-width: 64em) {
+    .book-content__chapters {
+      flex-direction: row; } }
   .book-content__chapters > a:nth-child(odd) {
     background: #f2f2f2; }
   .book-content__chapters > a {
@@ -422,10 +442,10 @@ body {
     font-size: 14px;
     color: #333333; }
 
-.book-delete {
+.book-buttons {
+  display: flex;
+  gap: 1rem;
   align-self: flex-start; }
-  .book-delete .btn {
-    background: #ff2929;
-    outline: 0;
+  .book-buttons .btn {
     font-size: 16px;
     padding: 0.5rem 2rem; }

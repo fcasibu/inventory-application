@@ -19,7 +19,7 @@ block content
           h6 Genre: #[span #{book.genre_list.length > 0 ? book.genre_list : 'N/A'}]
           h6 Tags: #[span #{book.tag_list.length > 0 ? book.tag_list : 'N/A'}]
         div.buttons
-          a.btn.btn__primary(href=`/books/${book._id}/comments`) Check comments
+          a.btn.btn__primary(href=`/books/${book._id}/comments`) Read comments
           a.btn.btn__primary Get full access
     div.book-summary
       h5 Summary
@@ -37,8 +37,10 @@ block content
                 p= chapter.createdAt_formatted
         else
           p No available chapters
-    div.book-delete
+    div.book-buttons
       a.btn.btn__danger(href=`${book.url}/delete`) Delete Book
+      a.btn.btn__primary(href=`${book.url}/update`) Update Book
+
 
 
 

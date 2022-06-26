@@ -23,13 +23,15 @@ block content
           a.btn.btn__primary Get full access
     div.book-summary
       h5 Summary
-      p= book.summary
+      p.pre-wrap= book.summary
     div.book-content
-      h5 Chapters
+      div.book-content__header
+        h5 Chapters
+        a.btn.btn__primary(href=`${book.url}/chapters/create`) Create chapter
       div.book-content__chapters
         if book.chapter_list.length > 0
           each chapter, index in book.chapter_list
-            a(href=chapter.url)
+            a(href=`${book.url}/chapters?page=${index + 1}`)
               div.chapter-count
                 p= index + 1
               div.chapter-info

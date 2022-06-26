@@ -75,6 +75,9 @@ body {
     .container {
       max-width: 1040px; } }
 
+.pre-wrap {
+  white-space: pre-wrap; }
+
 .btn {
   display: block;
   font-size: 24px;
@@ -311,7 +314,7 @@ body {
           font-size: 16px;
           color: #2945ff; }
 
-.form-book {
+.form {
   display: flex;
   flex-direction: column;
   gap: 1rem; }
@@ -325,29 +328,33 @@ body {
   flex-direction: column;
   gap: 0.5rem; }
 
-.form-control-book input[type='text'],
-.form-control-book input[type='password'],
-.form-control-book input[type='number'],
-.form-control-book select,
-.form-control-book textarea {
+.form-control input[type='text'],
+.form-control input[type='password'],
+.form-control input[type='number'],
+.form-control select,
+.form-control textarea {
   background: none;
   width: 100%;
   border: 0;
   border-radius: 0.375rem;
   outline: 2px solid #2945ff;
-  padding: 1rem 0.7rem; }
+  padding: 1rem 0.7rem;
+  resize: none; }
 
-.form-control-book .checkboxes {
+.form-control .checkboxes {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem; }
 
-.form-control-book textarea {
+.form-control .summary {
   height: 200px;
   resize: none; }
   @media (min-width: 64em) {
-    .form-control-book textarea {
+    .form-control .summary {
       height: 350px; } }
+
+.form-control .text {
+  height: 300px; }
 
 .form-control-book-right {
   flex: 1;
@@ -415,18 +422,26 @@ body {
         padding: 0.5rem 1.5rem; }
 
 .book-summary p {
-  font-size: 15px;
-  white-space: pre-wrap; }
+  font-size: 15px; }
   @media (min-width: 64em) {
     .book-summary p {
       font-size: 16px; } }
 
-.book-content__chapters {
+.book-content__header {
   display: flex;
-  flex-direction: column; }
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem; }
+  .book-content__header .btn {
+    padding: 0.3rem 1rem;
+    font-size: 16px; }
+
+.book-content__chapters {
+  display: grid;
+  grid-template-columns: 1fr; }
   @media (min-width: 64em) {
     .book-content__chapters {
-      flex-direction: row; } }
+      grid-template-columns: 1fr 1fr; } }
   .book-content__chapters > a:nth-child(odd) {
     background: #f2f2f2; }
   .book-content__chapters > a {
@@ -449,3 +464,15 @@ body {
   .book-buttons .btn {
     font-size: 16px;
     padding: 0.5rem 2rem; }
+
+.chapter-navigation {
+  display: grid;
+  place-items: center;
+  gap: 1rem; }
+  .chapter-navigation__links {
+    display: flex;
+    align-items: center;
+    gap: 1rem; }
+    .chapter-navigation__links .btn {
+      padding: 0.2rem 1rem;
+      font-size: 16px; }

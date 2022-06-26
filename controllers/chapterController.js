@@ -5,7 +5,6 @@ const Book = require('../models/book');
 exports.chapter_detail_get = async (req, res, next) => {
   try {
     const chapters = await Chapter.find({ book: req.params.bookId });
-    console.log(req.body);
     if (!req.query.page) {
       return res.render('chapter_list', {
         chapters,
@@ -13,7 +12,7 @@ exports.chapter_detail_get = async (req, res, next) => {
       });
     }
 
-    if (+req.query.page === 0)
+    if (+req.query.page === 0 || Number.isNaN(+req.query.page))
       return res.redirect(`/books/${req.params.bookId}`);
 
     if (!chapters[+req.query.page - 1]) {

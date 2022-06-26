@@ -68,7 +68,15 @@ const createTag = async (name) => {
   }
 };
 
-const createBook = async (title, photoURL, author, price, summary, genre, tag) => {
+const createBook = async (
+  title,
+  photoURL,
+  author,
+  price,
+  summary,
+  genre,
+  tag
+) => {
   try {
     const book = new Book({
       title,
@@ -202,7 +210,7 @@ const createBooks = async () => {
       'Test Book 1',
       'https://picsum.photos/536/354',
       authors[0],
-      54,
+      10,
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
       [genres[0], genres[1]],
       [tags[0]]
@@ -211,7 +219,7 @@ const createBooks = async () => {
       'Test Book 2',
       'https://picsum.photos/536/354',
       authors[1],
-      99,
+      30,
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
       [genres[0], genres[1], genres[2]],
       [tags[0], tags[1], tags[2]]
@@ -256,7 +264,10 @@ const createClubs = async () => {
 };
 
 const createMembers = async () => {
-  await Promise.all([createMember('nevz', clubs[0]), createMember('book_enjoyer', clubs[0])]);
+  await Promise.all([
+    createMember('nevz', clubs[0]),
+    createMember('book_enjoyer', clubs[0])
+  ]);
 };
 
 const createDiscussions = async () => {

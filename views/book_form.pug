@@ -51,10 +51,11 @@ block content
             if error
               p.error-message= error.msg
         label.form-control-book
-          p Admin Password
-          input(type='password' name='password')
-          if invalidPass
-            p.error-message= invalidPass.msg
+          if isUpdate
+            p Admin Password
+            input(type='password' name='password')
+            if invalidPass
+              p.error-message= invalidPass.msg
 
         button.btn.btn__primary(type='submit') Submit
          

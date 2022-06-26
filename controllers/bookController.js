@@ -33,7 +33,6 @@ exports.book_detail_get = async (req, res, next) => {
       })
       .exec();
 
-    console.log(book.genre.length, book.tag.length);
     res.render('book_detail', { book });
   } catch (err) {
     next(err);
@@ -184,7 +183,8 @@ exports.book_update_get = async (req, res, next) => {
       book: targetBook,
       authors,
       genres,
-      tags
+      tags,
+      isUpdate: true
     });
   } catch (err) {
     next(err);
@@ -239,6 +239,7 @@ exports.book_update_post = [
           genres,
           book,
           tags,
+          isUpdate: true,
           invalidPass: { msg: 'Invalid Password' }
         });
         return;
@@ -251,6 +252,7 @@ exports.book_update_post = [
           genres,
           book,
           tags,
+          isUpdate: true,
           errors: errors.array()
         });
       } else {

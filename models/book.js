@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
+const Chapter = require('./chapter');
 
 const BookSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, 'A title is required'],
     minLength: [3, 'A title must have a mininum length of 3 characters'],
-    maxLength: [20, 'A title must not exceed 20 characters']
+    maxLength: [70, 'A title must not exceed 70 characters'],
+    trim: true
   },
   summary: {
     type: String,
     required: [true, 'A summary is required'],
-    minLength: [3, 'A summary must have a minimum length of 3 characters'],
-    maxLengtH: [200, 'A summary must not exceed 200 characters']
+    minLength: [10, 'A summary must have a minimum length of 3 characters'],
+    maxLength: [1000, 'A summary must not exceed 1000 characters'],
+    trim: true,
+    escape: true
   },
   photoURL: {
     type: String,
-    default: 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg'
+    default: 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg',
+    trim: true
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -24,9 +29,9 @@ const BookSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: [true, 'A book must have a price'],
+    default: 10,
     min: 1,
-    max: 99
+    max: 30
   },
   createdAt: {
     type: Date,
@@ -48,6 +53,14 @@ const BookSchema = new mongoose.Schema({
 
 BookSchema.virtual('url').get(function () {
   return `/books/${this._id}`;
+});
+
+BookSchema.virtual('genre_list').get(function () {
+  return this.genre.reduce((acc, curr) => (acc += `${curr.name}, `), '');
+});
+
+BookSchema.virtual('tag_list').get(function () {
+  return this.tag.reduce((acc, curr) => (acc += `${curr.name}, `), '');
 });
 
 BookSchema.virtual('comment_list', {
@@ -75,5 +88,15 @@ BookSchema.virtual('chapter_count', {
   foreignField: 'book',
   count: true
 });
+
+// pre middleware for deleting all the chapters when a book is deleted
+// BookSchema.pre('findOneAndDelete', async function (next) {
+//   try {
+//     await Chapter.deleteMany({ book: this.getQuery()._id})
+//     next();
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = mongoose.model('Book', BookSchema);

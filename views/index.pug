@@ -13,9 +13,9 @@ block content
       img(src='/public/images/reading_hero.png')
   section.new-releases
     h5 New Releases
-    if book_list
+    if books
       div.books
-        each book in book_list
+        each book in books
           div(id=book._id).book
             div.book__image-container
               a(href=book.url)

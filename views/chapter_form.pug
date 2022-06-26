@@ -13,7 +13,7 @@ block content
             p.error-message= error.msg
       label.form-control
         p Content
-        textarea.text(name='text' placeholder='The moment that this powerful voice disappeared...' maxLength='1000') #{chapter===undefined ? '' : chapter.text}
+        textarea.text(name='text' placeholder='The moment that this powerful voice disappeared...' maxLength='6000') #{chapter===undefined ? '' : chapter.text}
         if errors
           - var error = errors.find(err => err.param === 'text')
           if error

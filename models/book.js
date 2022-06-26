@@ -56,11 +56,21 @@ BookSchema.virtual('url').get(function () {
 });
 
 BookSchema.virtual('genre_list').get(function () {
-  return this.genre.reduce((acc, curr) => (acc += `${curr.name}, `), '');
+  return this.genre
+    .reduce((acc, curr) => {
+      acc += `${curr.name}, `;
+      return acc;
+    }, '')
+    .slice(0, -2);
 });
 
 BookSchema.virtual('tag_list').get(function () {
-  return this.tag.reduce((acc, curr) => (acc += `${curr.name}, `), '');
+  return this.tag
+    .reduce((acc, curr) => {
+      acc += `${curr.name}, `;
+      return acc;
+    }, '')
+    .slice(0, -2);
 });
 
 BookSchema.virtual('comment_list', {
@@ -90,13 +100,13 @@ BookSchema.virtual('chapter_count', {
 });
 
 // pre middleware for deleting all the chapters when a book is deleted
-// BookSchema.pre('findOneAndDelete', async function (next) {
-//   try {
-//     await Chapter.deleteMany({ book: this.getQuery()._id})
-//     next();
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+BookSchema.pre('findOneAndDelete', async function (next) {
+  try {
+    await Chapter.deleteMany({ book: this.getQuery()._id });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = mongoose.model('Book', BookSchema);

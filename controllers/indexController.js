@@ -1,5 +1,4 @@
 const Book = require('../models/book');
-const Author = require('../models/author');
 
 exports.index = async (req, res, next) => {
   try {

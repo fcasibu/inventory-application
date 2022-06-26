@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h4= title
+  section(style='margin-top: 0')
+    form.form.form-chapter(action='' method='POST')
+      label.form-control
+        p Title
+        input(type='text' name='title' placeholder='Chapter Title' value=(chapter===undefined ? '' : chapter.title) maxLength='50')
+        if errors
+          - var error = errors.find(err => err.param === 'title')
+          if error
+            p.error-message= error.msg
+      label.form-control
+        p Content
+        textarea.text(name='text' placeholder='The moment that this powerful voice disappeared...' maxLength='1000') #{chapter===undefined ? '' : chapter.text}
+        if errors
+          - var error = errors.find(err => err.param === 'text')
+          if error
+            p.error-message= error.msg
+      label.form-control
+        if isUpdate
+          p Admin Password
+          input(type='password' name='password')
+          if invalidPass
+            p.error-message= invalidPass.msg
+
+      button.btn.btn__primary(type='submit' style='padding: 0.3rem 2rem; font-size: 24px') Submit
+      
+

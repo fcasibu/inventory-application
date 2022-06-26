@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  if chapter
+    form
+      input(type='hidden' name='chapter' id=chapter._id)
+    nav.chapter-navigation
+      div.chapter-navigation__title
+        h4= chapter.title
+      ul.chapter-navigation__links
+        li
+          a.btn.btn__transparent(href=`/books/${bookId}/chapters?page=${leftPage}`) 
+            i.fa-solid.fa-arrow-left
+        li
+          a.btn.btn__primary(href=`${chapter.url}/update`) Update chapter
+        li
+          a.btn.btn__transparent(href=`/books/${bookId}/chapters?page=${rightPage}`) 
+            i.fa-solid.fa-arrow-right
+    section.chapter-content
+      p.pre-wrap= chapter.text
+  else
+    nav.chapter-navigation
+      h4= error.msg
+      a.btn.btn__transparent(href=`/books/${bookId}/chapters?page=${leftPage}`)
+        i.fa-solid.fa-arrow-left

@@ -83,7 +83,7 @@ body {
   border-radius: 0.3rem;
   outline: 2px solid #2945ff;
   cursor: pointer;
-  transition: all 200ms ease-in-out; }
+  transition: all 100ms ease-in-out; }
   .btn__primary {
     background: #2945ff;
     color: white; }
@@ -96,6 +96,9 @@ body {
     .btn__transparent:hover {
       background: #2945ff;
       color: white; }
+  .btn__danger {
+    background: #ff2929;
+    color: white; }
 
 .header {
   display: flex;
@@ -418,3 +421,11 @@ body {
   .book-content__chapters .chapter-info p {
     font-size: 14px;
     color: #333333; }
+
+.book-delete {
+  align-self: flex-start; }
+  .book-delete .btn {
+    background: #ff2929;
+    outline: 0;
+    font-size: 16px;
+    padding: 0.5rem 2rem; }

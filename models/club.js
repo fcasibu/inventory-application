@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
+const { DateTime } = require('luxon');
 
 const ClubSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A name is required'],
-    minLength: [3, 'A name must have a mininum length of 3 characters'],
-    maxLength: [30, 'A name must not exceed 30 characters']
+    required: true,
+    minLength: 3,
+    maxLength: 30
   },
   book: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book',
     required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
@@ -29,6 +34,23 @@ ClubSchema.virtual('member_list', {
   ref: 'Member',
   localField: '_id',
   foreignField: 'club'
+});
+
+ClubSchema.virtual('thread_list', {
+  ref: 'Thread',
+  localField: '_id',
+  foreignField: 'club'
+});
+
+ClubSchema.virtual('thread_count', {
+  ref: 'Thread',
+  localField: '_id',
+  foreignField: 'club',
+  count: true
+});
+
+ClubSchema.virtual('createdAt_formatted').get(function () {
+  return DateTime.fromJSDate(this.createdAt).toLocaleString(DateTime.DATE_MED);
 });
 
 module.exports = mongoose.model('Club', ClubSchema);

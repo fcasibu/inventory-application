@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  section
+    div.club-hero
+      div.club-hero__title
+        h4= club.name
+      div.club-hero__stats
+        div
+          i.fa-solid.fa-comments
+          if club.thread_count
+            p #{club.thread_count} #{club.thread_count > 0 ? 'Threads' : 'Thread'}
+          else
+            p 0 Thread
+        div
+          i.fa-solid.fa-user-group
+          if club.member_count
+            p #{club.member_count} #{club.member_count > 0 ? 'Members' : 'Member'}
+          else
+            p 0 Member
+        div
+          i.fa-solid.fa-calendar
+          p= club.createdAt_formatted
+      div.club-hero__description
+        p This is a club related to the book #[a(href=club.book.url style='color: blue')= club.book.title]
+    div.club-threads    
+      div.club-threads__title
+        h5 Threads
+      div.club-threads__cards
+        each thread in club.thread_list
+          div.thread-card
+            div.thread-card__title
+              h6= thread.title
+            div.thread-card__description
+              p= thread.description
+            div.thread-card__date
+              span= thread.createdAt_formatted
+
+
+

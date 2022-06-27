@@ -9,7 +9,7 @@ const Tag = require('../models/tag');
 exports.book_list_get = async (req, res, next) => {
   const books = await Book.find()
     .populate('author')
-    .populate({ path: 'genre', options: { limit: 3 } })
+    .populate({ path: 'genre', limit: 3 })
     .populate('comment_count')
     .populate('chapter_count')
     .limit(30)
@@ -48,13 +48,13 @@ exports.book_create_get = async (req, res, next) => {
     const [authors, genres, tags] = await Promise.all([author, genre, tag]);
 
     res.render('book_form', {
-      title: 'Create a Book',
+      title: 'Create Book',
       authors,
       genres,
       tags
     });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 };
 
@@ -101,7 +101,7 @@ exports.book_create_post = [
         }
 
         res.render('book_form', {
-          title: 'Create a Book',
+          title: 'Create Book',
           authors,
           genres,
           book,
@@ -233,7 +233,7 @@ exports.book_update_post = [
       }
 
       if (req.body.password !== process.env.PASSWORD) {
-        res.render('book_form', {
+        return res.render('book_form', {
           title: 'Update Book',
           authors,
           genres,
@@ -242,7 +242,6 @@ exports.book_update_post = [
           isUpdate: true,
           invalidPass: { msg: 'Invalid Password' }
         });
-        return;
       }
 
       if (!errors.isEmpty()) {

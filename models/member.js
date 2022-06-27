@@ -7,6 +7,9 @@ const MemberSchema = new mongoose.Schema({
     minLength: [3, 'A name must have a mininum length of 3 characters'],
     maxLength: [25, 'A name must not exceed 25 characters']
   },
+  photoURL: {
+    type: String
+  },
   club: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Club',

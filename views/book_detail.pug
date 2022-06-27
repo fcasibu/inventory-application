@@ -10,7 +10,7 @@ block content
         div.chapter-count
           if book.chapter_count
             i.fa-solid.fa-book
-            p #{book.chapter_count} #{book.chapter_count > 1 ? 'Chapters' : 'Chapter'}
+            p #{book.chapter_count} #{book.chapter_count > 0 ? 'Chapters' : 'Chapter'}
           else
             i.fa-solid.fa-book
             p 0 Chapter

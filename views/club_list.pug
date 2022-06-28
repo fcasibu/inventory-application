@@ -14,11 +14,11 @@ block content
           img(src='/public/images/club_hero.png')
     div.club-list
       h4 Clubs
-      each book in Object.keys(bookCategory)
-        div.club-list__book-category
-          h5= book
-          each club in bookCategory[book]
-            div.club-list__cards
+      div.club-list__book-categories
+        each book in Object.keys(bookCategory)
+          div.club-list__book-category
+            h5= book
+            each club in bookCategory[book]
               a.club-list__card(href=club.url)
                 h6= club.name
                 div.card-stats

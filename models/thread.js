@@ -31,13 +31,13 @@ Thread.virtual('createdAt_formatted').get(function () {
   return DateTime.fromJSDate(this.createdAt).toLocaleString(DateTime.DATE_MED);
 });
 
-Thread.virtual('thread_comments', {
+Thread.virtual('comment_list', {
   ref: 'ThreadComment',
   localField: '_id',
   foreignField: 'thread'
 });
 
-Thread.virtual('thread_comments_count', {
+Thread.virtual('comment_count', {
   ref: 'ThreadComment',
   localField: '_id',
   foreignField: 'thread',

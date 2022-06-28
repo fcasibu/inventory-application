@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  section
+  section.club-detail-section
     div.club-hero
       div.club-hero__title
         h4= club.name
@@ -27,14 +27,22 @@ block content
       div.club-threads__title
         h5 Threads
       div.club-threads__cards
-        each thread in club.thread_list
-          div.thread-card
+        each thread in threads
+          a(href=thread.url).thread-card
             div.thread-card__title
               h6= thread.title
             div.thread-card__description
               p= thread.description
-            div.thread-card__date
-              span= thread.createdAt_formatted
+            div.thread-card__stats
+              div
+                i.fa-solid.fa-comment
+                if thread.comment_count
+                  span #{thread.comment_count} #{thread.comment_count > 1 ? 'Comments' : 'Comment'}
+                else
+                  span 0 Comment
+              div
+                i.fa-solid.fa-calendar
+                span= thread.createdAt_formatted
 
 
 

@@ -4,7 +4,24 @@ const ThreadComment = require('../models/threadComment');
 const Member = require('../models/member');
 
 exports.club_list_get = async (req, res, next) => {
-  res.render('club_list');
+  // I don't know if I should just use aggregation?
+  const clubs = await Club.find()
+    .populate('book', 'title')
+    .populate('member_count')
+    .populate('thread_count')
+    .exec();
+
+  const bookCategory = clubs.reduce((result, club) => {
+    if (!result[club.book.title]) {
+      result[club.book.title] = [];
+    }
+
+    result[club.book.title].push(club);
+
+    return result;
+  }, {});
+
+  res.render('club_list', { bookCategory });
 };
 
 exports.club_detail_get = async (req, res, next) => {

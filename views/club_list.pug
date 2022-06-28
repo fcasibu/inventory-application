@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  section
+  section(style='margin-top: 0')
     div.club-list-hero
       div
         div.club-list-hero__badge
@@ -15,27 +15,33 @@ block content
     div.club-list
       h4 Clubs
       div.club-list__book-categories
-        each book in Object.keys(bookCategory)
-          div.club-list__book-category
-            h5= book
-            each club in bookCategory[book]
-              a.club-list__card(href=club.url)
-                h6= club.name
-                div.card-stats
-                  div
-                    i.fa-solid.fa-comments
-                    if club.thread_count
-                      span #{club.thread_count} #{club.thread_count > 1 ? 'Threads' : 'Thread'}
-                    else
-                      span 0 Thread
-                  div
-                    i.fa-solid.fa-user-group
-                    if club.member_count
-                      span #{club.member_count} #{club.member_count > 1 ? 'Members' : 'Member'}
-                    else
-                      span 0 Member
-                  div
-                    i.fa-solid.fa-calendar
-                    span June 22, 2022
-
+        if bookCategory
+          - var bookCategories = Object.keys(bookCategory)
+          if bookCategories.length > 0
+            each book in bookCategories 
+              div.club-list__book-category
+                h5= book
+                each club in bookCategory[book]
+                  a.club-list__card(href=club.url)
+                    h6= club.name
+                    div.card-stats
+                      div
+                        i.fa-solid.fa-comments
+                        if club.thread_count
+                          span #{club.thread_count} #{club.thread_count > 1 ? 'Threads' : 'Thread'}
+                        else
+                          span 0 Thread
+                      div
+                        i.fa-solid.fa-user-group
+                        if club.member_count
+                          span #{club.member_count} #{club.member_count > 1 ? 'Members' : 'Member'}
+                        else
+                          span 0 Member
+                      div
+                        i.fa-solid.fa-calendar
+                        span June 22, 2022
+          else
+            h5 No available clubs
+        else
+          h5 No available clubs
 

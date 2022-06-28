@@ -501,6 +501,51 @@ body {
   background: #2945ff;
   border-radius: 0.2rem; }
 
+.club-list {
+  text-align: center; }
+  .club-list__book-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; }
+  .club-list__book-category {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 2rem; }
+  .club-list__card {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-start;
+    gap: 1rem;
+    background: url("/public/images/banner.png");
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-position: 150px center;
+    max-width: 95%;
+    padding: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    transition: all 200ms ease-out; }
+    .club-list__card:hover {
+      opacity: 0.5; }
+    .club-list__card:active {
+      transform: scale(0.95); }
+    @media (min-width: 28.75em) {
+      .club-list__card {
+        background-position-x: 300px; } }
+    @media (min-width: 49.375em) {
+      .club-list__card {
+        background-size: 400px;
+        background-position: right -50px; } }
+    .club-list__card .card-stats {
+      display: flex;
+      gap: 0.5rem; }
+      .club-list__card .card-stats > div {
+        display: flex;
+        gap: 0.5rem; }
+        .club-list__card .card-stats > div * {
+          font-size: 0.8rem; }
+
 .club-detail-section {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
 const express = require('express');
 const clubController = require('../controllers/clubController');
+const threadController = require('../controllers/threadController');
 
 const router = express.Router();
 
@@ -26,5 +27,13 @@ router.get('/:clubId/update', clubController.club_update_get);
 
 // Post request for a club update
 router.post('/:clubId/update', clubController.club_update_post);
+
+// Get request for a specific thread
+
+// Get request for thread creation
+router.get('/:clubId/threads/create', threadController.thread_create_get);
+
+// Post request for thread creation
+router.post('/:clubId/threads/create', threadController.thread_create_post);
 
 module.exports = router;

@@ -4,7 +4,7 @@ block content
   h6 Are you sure you want to delete #{book.title}?
   p It will delete all chapters related to it
   form(action='' method='POST' style='display: flex; flex-direction: column; gap: 1rem')
-    label.form-control-book
+    label.form-control
       p Admin Password
       input(type='password' name='password')
       if error

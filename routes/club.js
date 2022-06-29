@@ -15,4 +15,16 @@ router.post('/create', clubController.club_create_post);
 // Get request for a specific club
 router.get('/:clubId', clubController.club_detail_get);
 
+// Get request for a club deletion
+router.get('/:clubId/delete', clubController.club_delete_get);
+
+// Post request for a club deletion
+router.post('/:clubId/delete', clubController.club_delete_post);
+
+// Get request for a club update
+router.get('/:clubId/update', clubController.club_update_get);
+
+// Post request for a club update
+router.post('/:clubId/update', clubController.club_update_post);
+
 module.exports = router;

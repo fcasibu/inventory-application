@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h6 Are you sure you want to delete #{club.name}?
+  p It will delete all threads related to it
+  form(action='' method='POST' style='display: flex; flex-direction: column; gap: 1rem')
+    label.form-control
+      p Admin Password
+      input(type='password' name='password')
+      if error
+        p.error-message= error.msg
+
+    button.btn.btn__danger(type='submit' style='padding: 0.3rem 2rem') Delete

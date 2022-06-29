@@ -78,6 +78,9 @@ body {
 .pre-wrap {
   white-space: pre-wrap; }
 
+.skeleton:empty {
+  animation: skeletonLoading 1s ease-out infinite alternate; }
+
 .btn {
   display: block;
   font-size: 24px;
@@ -511,6 +514,9 @@ body {
       text-align: left;
       align-items: flex-start; } }
 
+.club-list-hero > div:last-child {
+  animation: moveRight 400ms ease-out; }
+
 .club-list-hero__badge h5 {
   color: #2945ff;
   letter-spacing: 3px;
@@ -523,6 +529,9 @@ body {
   @media (min-width: 49.375em) {
     .club-list-hero__description h4 {
       font-size: 48px; } }
+
+.club-list-hero__create a {
+  padding: 0.3rem 2rem; }
 
 .club-list-hero__line {
   width: 50px;
@@ -579,7 +588,8 @@ body {
 .club-detail-section {
   display: flex;
   flex-direction: column;
-  gap: 4rem; }
+  gap: 4rem;
+  margin-top: 0; }
 
 .club-hero {
   display: flex;
@@ -607,6 +617,13 @@ body {
   justify-content: center;
   align-items: center;
   animation: moveUp 500ms ease-out; }
+  .club-threads__title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; }
+    .club-threads__title .btn {
+      padding: 0.2rem 1.5rem;
+      font-size: 16px; }
   .club-threads__cards {
     display: grid;
     grid-template-columns: 1fr;
@@ -658,6 +675,15 @@ body {
       .thread-card__stats {
         justify-content: flex-end; } }
 
+.club-buttons {
+  display: flex;
+  gap: 1rem;
+  align-self: flex-start;
+  animation: moveUp 500ms ease-out 400ms backwards; }
+  .club-buttons .btn {
+    font-size: 16px;
+    padding: 0.5rem 2rem; }
+
 @keyframes moveLeft {
   0% {
     opacity: 0;
@@ -689,3 +715,9 @@ body {
   100% {
     transform: translateY(0);
     opacity: 1; } }
+
+@keyframes skeletonLoading {
+  0% {
+    background: #a3b8c2; }
+  100% {
+    background: #f0f3f5; } }

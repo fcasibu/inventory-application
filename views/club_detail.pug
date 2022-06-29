@@ -26,6 +26,7 @@ block content
     div.club-threads    
       div.club-threads__title
         h5 Threads
+        a.btn.btn__primary(href=`${club.url}/threads/create`) Create Thread
       div.club-threads__cards
         each thread in threads
           a(href=thread.url).thread-card
@@ -43,6 +44,11 @@ block content
               div
                 i.fa-solid.fa-calendar
                 span= thread.createdAt_formatted
+    div.club-buttons
+      a.btn.btn__danger(href=`${club.url}/delete`) Delete Club
+      a.btn.btn__primary(href=`${club.url}/update`) Update Club
+
+
 
 
 

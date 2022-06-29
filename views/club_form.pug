@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h4= title
+  section(style='margin-top: 0')
+    form.form.form-club(action='' method='POST')
+      label.form-control
+        p Club Name
+        input(type='text' name='name' placeholder='Club Name' value=(club===undefined ? '' : club.name) maxLength='30')
+        if errors
+          - var error = errors.find(err => err.param === 'name')
+          if error
+            p.error-message= error.msg
+      label.form-control
+        p Book
+        select(name='book' required)
+          each book in books
+            if club
+              option(value=book._id selected=(book._id.toString() === club.book._id.toString() ? 'selected' : false)) #{book.title}
+            else
+              option(value=book._id) #{book.title}
+      label.form-control
+        if isUpdate
+          p Admin Password
+          input(type='password' name='password')
+          if invalidPass
+            p.error-message= invalidPass.msg
+
+      button.btn.btn__primary(type='submit' style='padding: 0.3rem 2rem; font-size: 24px') Submit
+      
+

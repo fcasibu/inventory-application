@@ -19,7 +19,7 @@ block content
           div(id=book._id).book
             div.book__image-container
               a(href=book.url)
-                img(src=book.photoURL)
+                img.skeleton(src=book.photoURL)
             div.book__top
               div
                 a(href=book.author.url)

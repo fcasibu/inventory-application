@@ -639,19 +639,19 @@ body {
   text-align: center;
   gap: 1rem;
   border-radius: 0.4rem;
-  max-width: 95%;
+  width: 100%;
   margin: 0 auto;
   padding: 0.8rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   transition: all 200ms ease-out; }
   .thread-card:hover {
-    transform: scale(1.05);
-    background: rgba(0, 0, 0, 0.05); }
+    opacity: 0.5; }
   .thread-card:active {
     transform: scale(1); }
   @media (min-width: 64em) {
     .thread-card {
-      text-align: left; } }
+      text-align: left;
+      width: 470px; } }
   .thread-card__description {
     max-width: 55ch; }
     .thread-card__description p {

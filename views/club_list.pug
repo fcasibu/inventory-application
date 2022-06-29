@@ -7,7 +7,9 @@ block content
         div.club-list-hero__badge
           h5 Clubs
         div.club-list-hero__description
-          h4 Join Clubs to talk about the book you all enjoy!
+          h4 Create or Join Clubs to talk about the book you all enjoy!
+        div.club-list-hero__create
+          a.btn.btn__primary(href='/clubs/create') Create
         div.club-list-hero__line
       div
         div.club-list-hero__image-container
@@ -39,7 +41,7 @@ block content
                           span 0 Member
                       div
                         i.fa-solid.fa-calendar
-                        span June 22, 2022
+                        span= club.createdAt_formatted
           else
             h5 No available clubs
         else

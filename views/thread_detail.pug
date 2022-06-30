@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  section.thread-detail
+    h4= thread.title
+    p= thread.description
+    div.thread-detail__comments
+      each comment, index in thread.comment_list
+        div.thread-detail__comment
+          p= comment.text
+          span # #{index + 1}
+    form.thread-detail__form(action='' method='POST')
+      label.form-control
+        p Comment
+        textarea.text(name='text' maxLength='500') #{threadComment===undefined ? '' : threadComment.text}
+        if errors
+          - var error = errors.find(err => err.param === 'text')
+          if error
+            p.error-message= error.msg
+
+      button.btn.btn__primary(type='submit' style='padding: 0.3rem 2rem; font-size: 24px') Submit

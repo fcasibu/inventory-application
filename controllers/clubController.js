@@ -8,28 +8,17 @@ const Member = require('../models/member');
 exports.club_list_get = async (req, res, next) => {
   // I don't know if I should just use aggregation?
   const clubs = await Club.find()
-    .populate('book', 'title')
     .populate('member_count')
     .populate('thread_count')
     .sort('member_count')
     .exec();
 
-  const bookCategory = clubs.reduce((result, club) => {
-    if (!result[club.book.title]) {
-      result[club.book.title] = [];
-    }
-
-    result[club.book.title].push(club);
-
-    return result;
-  }, {});
-  res.render('club_list', { bookCategory });
+  res.render('club_list', { clubs });
 };
 
 exports.club_detail_get = async (req, res, next) => {
   try {
     const club = Club.findById(req.params.clubId)
-      .populate('book', 'title')
       .populate('thread_count')
       .populate('member_count')
       .exec();
@@ -47,14 +36,8 @@ exports.club_detail_get = async (req, res, next) => {
   }
 };
 
-exports.club_create_get = async (req, res, next) => {
-  try {
-    const books = await Book.find({}, 'title').exec();
-
-    res.render('club_form', { title: 'Create a Club', books });
-  } catch (err) {
-    next(err);
-  }
+exports.club_create_get = (req, res, next) => {
+  res.render('club_form', { title: 'Create a Club' });
 };
 
 exports.club_create_post = [
@@ -68,16 +51,12 @@ exports.club_create_post = [
     try {
       const errors = validationResult(req);
       const club = new Club({
-        name: req.body.name,
-        book: req.body.book
+        name: req.body.name
       });
 
       if (!errors.isEmpty()) {
-        const books = await Book.find({}, 'title').exec();
-
         return res.render('club_form', {
           title: 'Create a Club',
-          books,
           club,
           errors: errors.array()
         });
@@ -116,11 +95,9 @@ exports.club_delete_post = async (req, res, next) => {
 
 exports.club_update_get = async (req, res, next) => {
   try {
-    const club = Club.findById(req.params.clubId);
-    const book = Book.find({}, 'title');
-    const [targetClub, books] = await Promise.all([club, book]);
+    const club = await Club.findById(req.params.clubId);
 
-    res.render('club_form', { club: targetClub, books, isUpdate: true });
+    res.render('club_form', { club, isUpdate: true });
   } catch (err) {
     next(err);
   }
@@ -136,10 +113,8 @@ exports.club_update_post = [
   async (req, res, next) => {
     try {
       const errors = validationResult(req);
-      const books = await Book.find({}, 'title').exec();
       const club = new Club({
         name: req.body.name,
-        book: req.body.book,
         _id: req.params.clubId
       });
 
@@ -147,7 +122,6 @@ exports.club_update_post = [
         return res.render('club_form', {
           title: 'Update Club',
           club,
-          books,
           isUpdate: true,
           invalidPass: { msg: 'Invalid Password' }
         });
@@ -156,7 +130,6 @@ exports.club_update_post = [
       if (!errors.isEmpty()) {
         return res.render('club_form', {
           title: 'Create a Club',
-          books,
           club,
           isUpdate: true,
           errors: errors.array()

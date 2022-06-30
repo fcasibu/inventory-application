@@ -1,7 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const Book = require('../models/book');
 const Chapter = require('../models/chapter');
-const Comment = require('../models/comment');
 const Author = require('../models/author');
 const Genre = require('../models/genre');
 const Tag = require('../models/tag');
@@ -10,7 +9,6 @@ exports.book_list_get = async (req, res, next) => {
   const books = await Book.find()
     .populate('author')
     .populate({ path: 'genre', limit: 3 })
-    .populate('comment_count')
     .populate('chapter_count')
     .limit(30)
     .exec();

@@ -1,12 +1,8 @@
 const { body, validationResult } = require('express-validator');
 const Club = require('../models/club');
-const Book = require('../models/book');
-const Thread = require('../models/thread');
-const ThreadComment = require('../models/threadComment');
 const Member = require('../models/member');
 
 exports.club_list_get = async (req, res, next) => {
-  // I don't know if I should just use aggregation?
   const clubs = await Club.find()
     .populate('member_count')
     .populate('thread_count')
@@ -18,19 +14,13 @@ exports.club_list_get = async (req, res, next) => {
 
 exports.club_detail_get = async (req, res, next) => {
   try {
-    const club = Club.findById(req.params.clubId)
+    const club = await Club.findById(req.params.clubId)
       .populate('thread_count')
       .populate('member_count')
+      .populate('thread_list')
       .exec();
 
-    // I can also just populate thread above
-    const thread = Thread.find({ club: req.params.clubId })
-      .populate('comment_count')
-      .exec();
-
-    const [targetClub, threads] = await Promise.all([club, thread]);
-
-    res.render('club_detail', { club: targetClub, threads });
+    res.render('club_detail', { club });
   } catch (err) {
     next(err);
   }

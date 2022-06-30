@@ -1,16 +1,13 @@
 const { body, validationResult } = require('express-validator');
+const catchErr = require('../utils/catchErr');
 const Thread = require('../models/thread');
 const Club = require('../models/club');
 
-exports.thread_detail_get = async (req, res, next) => {
-  try {
-    const thread = await Thread.findById(req.params.threadId).exec();
+exports.thread_detail_get = catchErr(async (req, res, next) => {
+  const thread = await Thread.findById(req.params.threadId).exec();
 
-    res.render('thread_detail', { thread });
-  } catch (err) {
-    next(err);
-  }
-};
+  res.render('thread_detail', { thread });
+});
 
 exports.thread_create_get = (req, res, next) => {
   res.render('thread_form', { title: 'Create a Thread' });
@@ -29,31 +26,27 @@ exports.thread_create_post = [
     .isLength({ min: 3 })
     .escape(),
 
-  async (req, res, next) => {
-    try {
-      const errors = validationResult(req);
-      const club = await Club.findById(req.params.clubId);
+  catchErr(async (req, res, next) => {
+    const errors = validationResult(req);
+    const club = await Club.findById(req.params.clubId);
 
-      const thread = new Thread({
-        title: req.body.title,
-        description: req.body.description,
-        club
+    const thread = new Thread({
+      title: req.body.title,
+      description: req.body.description,
+      club
+    });
+
+    if (!errors.isEmpty()) {
+      return res.render('thread_form', {
+        title: 'Create a Thread',
+        thread,
+        errors: errors.array()
       });
-
-      if (!errors.isEmpty()) {
-        return res.render('thread_form', {
-          title: 'Create a Thread',
-          thread,
-          errors: errors.array()
-        });
-      }
-
-      await thread.save();
-      res.redirect(thread.url);
-    } catch (err) {
-      next(err);
     }
-  }
+
+    await thread.save();
+    res.redirect(thread.url);
+  })
 ];
 
 exports.threadComment_create_post = [
@@ -64,30 +57,26 @@ exports.threadComment_create_post = [
     .trim()
     .isLength({ min: 3, max: 500 }),
 
-  async (req, res, next) => {
-    try {
-      const errors = validationResult(req);
-      const thread = await Thread.findById(req.params.threadId).exec();
+  catchErr(async (req, res, next) => {
+    const errors = validationResult(req);
+    const thread = await Thread.findById(req.params.threadId).exec();
 
-      if (!errors.isEmpty()) {
-        return res.render('thread_detail', {
-          thread,
-          threadComment: req.body.text,
-          errors: errors.array()
-        });
-      }
-      const newThread = await Thread.findByIdAndUpdate(
-        req.params.threadId,
-        {
-          $push: {
-            comments: req.body.text
-          }
-        },
-        { new: true }
-      ).exec();
-      res.redirect(newThread.url);
-    } catch (err) {
-      next(err);
+    if (!errors.isEmpty()) {
+      return res.render('thread_detail', {
+        thread,
+        threadComment: req.body.text,
+        errors: errors.array()
+      });
     }
-  }
+    const newThread = await Thread.findByIdAndUpdate(
+      req.params.threadId,
+      {
+        $push: {
+          comments: req.body.text
+        }
+      },
+      { new: true }
+    ).exec();
+    res.redirect(newThread.url);
+  })
 ];

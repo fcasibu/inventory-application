@@ -28,12 +28,6 @@ block content
                   else 
                     p 0 chapter
                 div
-                  i.fa-solid.fa-comment
-                  if book.comment_count
-                    p #{book.comment_count} #{book.comment_count > 1 ? 'Comments' : 'Comment'}
-                  else
-                    p 0 Comment
-                div
                   i.fa-regular.fa-money-bill-1
                   p #{book.price}$
               div.card__body-description

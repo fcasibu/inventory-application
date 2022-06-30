@@ -19,7 +19,6 @@ block content
           h6 Genre: #[span #{book.genre_list.length > 0 ? book.genre_list : 'N/A'}]
           h6 Tags: #[span #{book.tag_list.length > 0 ? book.tag_list : 'N/A'}]
         div.buttons
-          a.btn.btn__primary(href=`/books/${book._id}/comments`) Read comments
           a.btn.btn__primary Get full access
     div.book-summary
       h5 Summary

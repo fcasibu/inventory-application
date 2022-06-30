@@ -1,13 +1,10 @@
 const { body, validationResult } = require('express-validator');
 const Thread = require('../models/thread');
-const ThreadComment = require('../models/threadComment');
 const Club = require('../models/club');
 
 exports.thread_detail_get = async (req, res, next) => {
   try {
-    const thread = await Thread.findById(req.params.threadId)
-      .populate('comment_list')
-      .exec();
+    const thread = await Thread.findById(req.params.threadId).exec();
 
     res.render('thread_detail', { thread });
   } catch (err) {
@@ -36,6 +33,7 @@ exports.thread_create_post = [
     try {
       const errors = validationResult(req);
       const club = await Club.findById(req.params.clubId);
+
       const thread = new Thread({
         title: req.body.title,
         description: req.body.description,
@@ -69,25 +67,25 @@ exports.threadComment_create_post = [
   async (req, res, next) => {
     try {
       const errors = validationResult(req);
-      const thread = await Thread.findById(req.params.threadId)
-        .populate('comment_list')
-        .exec();
-
-      const comment = new ThreadComment({
-        text: req.body.text,
-        thread
-      });
+      const thread = await Thread.findById(req.params.threadId).exec();
 
       if (!errors.isEmpty()) {
         return res.render('thread_detail', {
           thread,
-          threadComment: comment,
+          threadComment: req.body.text,
           errors: errors.array()
         });
       }
-
-      await comment.save();
-      res.redirect(thread.url);
+      const newThread = await Thread.findByIdAndUpdate(
+        req.params.threadId,
+        {
+          $push: {
+            comments: req.body.text
+          }
+        },
+        { new: true }
+      ).exec();
+      res.redirect(newThread.url);
     } catch (err) {
       next(err);
     }

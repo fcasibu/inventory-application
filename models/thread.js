@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { DateTime } = require('luxon');
+const ThreadComment = require('./threadComment');
 
 const Thread = new mongoose.Schema({
   title: {
@@ -42,6 +43,14 @@ Thread.virtual('comment_count', {
   localField: '_id',
   foreignField: 'thread',
   count: true
+});
+
+Thread.pre('findOneAndDelete', async function (next) {
+  try {
+    await ThreadComment.deleteMany({ thread: this.getQuery()._id });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = mongoose.model('Thread', Thread);

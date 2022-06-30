@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { DateTime } = require('luxon');
+const Thread = require('./thread');
 
 const ClubSchema = new mongoose.Schema({
   name: {
@@ -7,11 +8,6 @@ const ClubSchema = new mongoose.Schema({
     required: true,
     minLength: 3,
     maxLength: 30
-  },
-  book: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Book',
-    required: true
   },
   createdAt: {
     type: Date,

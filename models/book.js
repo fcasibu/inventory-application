@@ -4,27 +4,22 @@ const Chapter = require('./chapter');
 const BookSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'A title is required'],
-    minLength: [3, 'A title must have a mininum length of 3 characters'],
-    maxLength: [70, 'A title must not exceed 70 characters'],
-    trim: true
+    required: true,
+    minLength: 3,
+    maxLength: 70
   },
   summary: {
     type: String,
-    required: [true, 'A summary is required'],
-    minLength: [10, 'A summary must have a minimum length of 3 characters'],
-    maxLength: [1000, 'A summary must not exceed 1000 characters'],
-    trim: true,
-    escape: true
+    required: true,
+    minLength: 10,
+    maxLength: 1000
   },
   photoURL: {
-    type: String,
-    default: 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg',
-    trim: true
+    type: String
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'A book must have an author'],
+    required: true,
     ref: 'Author'
   },
   price: {

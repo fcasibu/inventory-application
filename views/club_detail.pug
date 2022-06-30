@@ -26,7 +26,7 @@ block content
         h5 Threads
         a.btn.btn__primary(href=`${club.url}/threads/create`) Create Thread
       div.club-threads__cards
-        each thread in threads
+        each thread in club.thread_list
           a(href=thread.url).thread-card
             div.thread-card__title
               h6= thread.title
@@ -35,8 +35,8 @@ block content
             div.thread-card__stats
               div
                 i.fa-solid.fa-comment
-                if thread.comment_count
-                  span #{thread.comment_count} #{thread.comment_count > 1 ? 'Comments' : 'Comment'}
+                if thread.comments
+                  span #{thread.comments.length} #{thread.comments.length > 1 ? 'Comments' : 'Comment'}
                 else
                   span 0 Comment
               div

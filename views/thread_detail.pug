@@ -5,9 +5,9 @@ block content
     h4= thread.title
     p= thread.description
     div.thread-detail__comments
-      each comment, index in thread.comment_list
+      each comment, index in thread.comments
         div.thread-detail__comment
-          p= comment.text
+          p= comment
           span # #{index + 1}
     form.thread-detail__form(action='' method='POST')
       label.form-control

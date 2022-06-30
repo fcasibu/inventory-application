@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { DateTime } = require('luxon');
-const ThreadComment = require('./threadComment');
 
 const Thread = new mongoose.Schema({
   title: {
@@ -18,6 +17,7 @@ const Thread = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Club'
   },
+  comments: [{ type: String, minLength: 3, maxLength: 500 }],
   createdAt: {
     type: Date,
     default: Date.now
@@ -30,27 +30,6 @@ Thread.virtual('url').get(function () {
 
 Thread.virtual('createdAt_formatted').get(function () {
   return DateTime.fromJSDate(this.createdAt).toLocaleString(DateTime.DATE_MED);
-});
-
-Thread.virtual('comment_list', {
-  ref: 'ThreadComment',
-  localField: '_id',
-  foreignField: 'thread'
-});
-
-Thread.virtual('comment_count', {
-  ref: 'ThreadComment',
-  localField: '_id',
-  foreignField: 'thread',
-  count: true
-});
-
-Thread.pre('findOneAndDelete', async function (next) {
-  try {
-    await ThreadComment.deleteMany({ thread: this.getQuery()._id });
-  } catch (err) {
-    next(err);
-  }
 });
 
 module.exports = mongoose.model('Thread', Thread);

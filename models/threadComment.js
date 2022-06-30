@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ThreadCommentSchema = new mongoose.Schema({
-  comment: {
+  text: {
     type: String,
     minLength: 3,
     maxLength: 500

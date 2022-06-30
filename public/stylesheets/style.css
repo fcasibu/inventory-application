@@ -1,3 +1,41 @@
+@keyframes moveLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-6.25rem); }
+  100% {
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes moveRight {
+  0% {
+    opacity: 0;
+    transform: translateX(6.25rem); }
+  100% {
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes moveUp {
+  0% {
+    opacity: 0;
+    transform: translateY(6.25rem); }
+  100% {
+    transform: translateY(0);
+    opacity: 1; } }
+
+@keyframes moveDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-6.25rem); }
+  100% {
+    transform: translateY(0);
+    opacity: 1; } }
+
+@keyframes skeletonLoading {
+  0% {
+    background: #a3b8c2; }
+  100% {
+    background: #f0f3f5; } }
+
 *,
 *::before,
 *::after {
@@ -684,40 +722,36 @@ body {
     font-size: 16px;
     padding: 0.5rem 2rem; }
 
-@keyframes moveLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-6.25rem); }
-  100% {
-    transform: translateX(0);
-    opacity: 1; } }
-
-@keyframes moveRight {
-  0% {
-    opacity: 0;
-    transform: translateX(6.25rem); }
-  100% {
-    transform: translateX(0);
-    opacity: 1; } }
-
-@keyframes moveUp {
-  0% {
-    opacity: 0;
-    transform: translateY(6.25rem); }
-  100% {
-    transform: translateY(0);
-    opacity: 1; } }
-
-@keyframes moveDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-6.25rem); }
-  100% {
-    transform: translateY(0);
-    opacity: 1; } }
-
-@keyframes skeletonLoading {
-  0% {
-    background: #a3b8c2; }
-  100% {
-    background: #f0f3f5; } }
+.thread-detail {
+  margin-top: 0; }
+  .thread-detail p {
+    font-size: 16px;
+    white-space: pre-wrap; }
+  @media (min-width: 49.375em) {
+    .thread-detail {
+      text-align: left; } }
+  .thread-detail__comments {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem; }
+  .thread-detail__comment {
+    position: relative;
+    border-radius: 0.3rem;
+    padding: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); }
+    .thread-detail__comment p {
+      max-width: 95%; }
+    .thread-detail__comment span {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      color: #b3b3b3;
+      font-size: 20px;
+      font-weight: 700; }
+  .thread-detail__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; }
+    .thread-detail__form textarea {
+      max-height: 250px; }

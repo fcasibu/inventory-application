@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  div.error-page
+    div.error-page__image-wrapper
+      img(src='/public/images/404.png')
+    div.error-page__message
+      h4= message
+    div.error-page__home-btn
+      a(href='/') &larr; Back to Home

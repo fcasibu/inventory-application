@@ -8,7 +8,7 @@ Inventory Application Project for The Odin Project
 
 ## Demo
 
-[Live Preview]()
+[Live Preview](https://plum-crazy-codfish.cyclic.app/)
 
 ## Features
 

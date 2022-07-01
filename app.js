@@ -21,6 +21,9 @@ db.on('error', () => console.error('ERROR CONNECTING TO MONGODB'));
 
 const indexRouter = require('./routes/index');
 const bookRouter = require('./routes/book');
+const clubRouter = require('./routes/club');
+const createRouter = require('./routes/create');
+const authorRouter = require('./routes/author');
 
 const app = express();
 
@@ -47,6 +50,9 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/books', bookRouter);
+app.use('/clubs', clubRouter);
+app.use('/create', createRouter);
+app.use('/authors', authorRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

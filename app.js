@@ -24,6 +24,7 @@ const bookRouter = require('./routes/book');
 const clubRouter = require('./routes/club');
 const createRouter = require('./routes/create');
 const authorRouter = require('./routes/author');
+const successRouter = require('./routes/success');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/books', bookRouter);
 app.use('/clubs', clubRouter);
 app.use('/create', createRouter);
 app.use('/authors', authorRouter);
+app.use('/success', successRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -64,6 +66,8 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  if (err.name === 'CastError') res.locals.message = 'Not Found';
 
   // render the error page
   res.status(err.status || 500);

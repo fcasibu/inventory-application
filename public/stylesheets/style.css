@@ -857,3 +857,28 @@ body {
 
 .author-list__name h5 {
   font-size: 16px; }
+
+.error-page,
+.success-page {
+  display: grid;
+  place-items: center;
+  text-align: center; }
+  .error-page__image-wrapper,
+  .success-page__image-wrapper {
+    max-width: 400px; }
+  .error-page__home-btn,
+  .success-page__home-btn {
+    border-bottom: 2px solid #2945ff;
+    padding: 1rem;
+    transition: all 0.3s ease-out; }
+    .error-page__home-btn:hover,
+    .success-page__home-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 1rem rgba(41, 69, 255, 0.2); }
+    .error-page__home-btn:active,
+    .success-page__home-btn:active {
+      transform: scale(1);
+      box-shadow: 0 0 0 rgba(41, 69, 255, 0.2); }
+    .error-page__home-btn a,
+    .success-page__home-btn a {
+      color: #2945ff; }

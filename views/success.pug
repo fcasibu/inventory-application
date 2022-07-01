@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div.success-page
+    div.success-page__image-wrapper
+      img(src='/public/images/success.png')
+    div.success-page__message
+      h4= message
+    div.success-page__home-btn
+      a(href='/') &larr; Back to Home

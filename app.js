@@ -67,7 +67,8 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  if (err.name === 'CastError') res.locals.message = 'Not Found';
+  if (err.name === 'CastError' || err.name === 'TypeError')
+    res.locals.message = 'Not Found';
 
   // render the error page
   res.status(err.status || 500);

@@ -19,7 +19,7 @@ block content
           h6 Genre: #[span #{book.genre_list.length > 0 ? book.genre_list : 'N/A'}]
           h6 Tags: #[span #{book.tag_list.length > 0 ? book.tag_list : 'N/A'}]
         div.buttons
-          a.btn.btn__primary Get full access
+          a.btn.btn__primary(href='/success') Add to Inventory
     div.book-summary
       h5 Summary
       p.pre-wrap= book.summary

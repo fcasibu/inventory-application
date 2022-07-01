@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  section
+    h4 #{author.name}'s Books
+    section.book-cards
+      each book in books
+        div.card
+          div.card__image-container
+            a(href=book.url)
+              img.skeleton(src=book.photoURL)
+          div.card__body
+            div.card__body-head
+              a(href=book.url)
+                h5= book.title
+            div.card__body-stats
+              div
+                i.fa-solid.fa-book
+                if book.chapter_count
+                  p #{book.chapter_count} #{book.chapter_count > 1 ? 'Chapters' : 'Chapter'}
+                else 
+                  p 0 chapter
+              div
+                i.fa-regular.fa-money-bill-1
+                p #{book.price}$
+            div.card__body-description
+              p= book.summary
+            div.card__body-genres
+              if book.genre
+                each genre in book.genre
+                  div
+                    a(href=genre.url)
+                      p= genre.name
+
+      else
+        h6 The author does not have any book yet

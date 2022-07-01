@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  section(style='margin-top: 0')
+    div.author-list-hero
+      div
+        div.author-list-hero__badge
+          h5 Authors
+        div.author-list-hero__description
+          h4 Check out all the authors and their amazing works!
+        div.club-list-hero__line
+      div
+        div.club-list-hero__image-container
+          img(src='/public/images/author_hero.png')
+    div.author-list
+      h4 Authors
+      div.author-list__cards
+        each author in authors
+          a.author-list__card(href=author.url)
+            div.author-list__image-wrapper
+              img.skeleton(src=author.photoURL)
+            div.author-list__details
+              div.author-list__name
+                h5= author.name
+              div.author-list__book-count
+                if author.book_count
+                  span #{author.book_count} #{author.book_count > 1 ? 'Books' : 'Book'}
+                else
+                  span 0 Book
+        else
+          h5 No available authors
+

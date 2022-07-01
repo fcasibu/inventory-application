@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h4= title
+  section(style='margin-top: 0')
+    form.form.form-author(action='' method='POST')
+      label.form-control
+        p Author Name
+        input(type='text' name='name' placeholder='Stephen King' value=(author===undefined ? '' : author.name) maxLength='20')
+        if errors
+          - var error = errors.find(err => err.param === 'name')
+          if error
+            p.error-message= error.msg
+      label.form-control
+        p Avatar
+        input(type='text' name='photoURL' placeholder='https://example.com' value=(author===undefined ? '' : author.photoURL) maxLength='1000')
+        if errors
+          - var error = errors.find(err => err.param === 'photoURL')
+          if error
+            p.error-message= error.msg
+      label.form-control
+        if isUpdate
+          p Admin Password
+          input(type='password' name='password')
+          if invalidPass
+            p.error-message= invalidPass.msg
+
+      button.btn.btn__primary(type='submit' style='padding: 0.3rem 2rem; font-size: 24px') Submit
+      
+

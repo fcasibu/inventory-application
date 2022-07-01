@@ -755,3 +755,105 @@ body {
     gap: 2rem; }
     .thread-detail__form textarea {
       max-height: 250px; }
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; }
+
+.category {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: flex-start;
+  gap: 1rem;
+  background: url("/public/images/banner.png");
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: 150px center;
+  max-width: 95%;
+  padding: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-out; }
+  .category span {
+    font-size: 24px;
+    font-weight: 400; }
+  .category:hover {
+    opacity: 0.5; }
+  .category:active {
+    transform: scale(0.95); }
+  @media (min-width: 28.75em) {
+    .category {
+      background-position-x: 300px; } }
+  @media (min-width: 49.375em) {
+    .category {
+      background-size: 400px;
+      background-position: right -50px; } }
+
+@media (min-width: 49.375em) {
+  .author-list-hero {
+    display: flex;
+    align-items: center;
+    gap: 2rem; } }
+
+.author-list-hero > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  gap: 1rem;
+  animation: moveLeft 400ms ease-out; }
+  @media (min-width: 49.375em) {
+    .author-list-hero > div {
+      text-align: left;
+      align-items: flex-start; } }
+
+.author-list-hero > div:last-child {
+  animation: moveRight 400ms ease-out; }
+
+.author-list-hero__badge h5 {
+  color: #2945ff;
+  letter-spacing: 3px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 16px; }
+
+.author-list-hero__description h4 {
+  line-height: 1.5; }
+  @media (min-width: 49.375em) {
+    .author-list-hero__description h4 {
+      font-size: 48px; } }
+
+.author-list-hero__line {
+  width: 50px;
+  height: 5px;
+  background: #2945ff;
+  border-radius: 0.2rem; }
+
+.author-list__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; }
+
+.author-list__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); }
+  @media (max-width: 49.375em) {
+    .author-list__card {
+      width: 100%; } }
+
+.author-list__image-wrapper {
+  overflow: hidden; }
+  .author-list__image-wrapper img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover; }
+
+.author-list__name h5 {
+  font-size: 16px; }

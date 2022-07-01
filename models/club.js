@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { DateTime } = require('luxon');
 const Thread = require('./thread');
+const catchErr = require('../utils/catchErr');
 
 const ClubSchema = new mongoose.Schema({
   name: {
@@ -47,6 +48,15 @@ ClubSchema.virtual('thread_count', {
 
 ClubSchema.virtual('createdAt_formatted').get(function () {
   return DateTime.fromJSDate(this.createdAt).toLocaleString(DateTime.DATE_MED);
+});
+
+ClubSchema.pre('findOneAndDelete', async function (next) {
+  try {
+    await Thread.deleteMany({ club: this.getQuery()._id });
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = mongoose.model('Club', ClubSchema);

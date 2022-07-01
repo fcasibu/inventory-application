@@ -17,13 +17,13 @@ AuthorSchema.virtual('url').get(function () {
 });
 
 AuthorSchema.virtual('book_list', {
-  ref: 'book',
+  ref: 'Book',
   localField: '_id',
   foreignField: 'author'
 });
 
-AuthorSchema.virtual('book_list_count', {
-  ref: 'book',
+AuthorSchema.virtual('book_count', {
+  ref: 'Book',
   localField: '_id',
   foreignField: 'author',
   count: true

@@ -32,7 +32,6 @@ exports.club_create_post = [
     .trim()
     .isLength({ min: 3 })
     .escape(),
-  body('book', 'You need to select a book').trim().isLength({ min: 1 }),
 
   catchErr(async (req, res, next) => {
     const errors = validationResult(req);

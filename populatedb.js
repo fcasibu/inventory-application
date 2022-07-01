@@ -6,8 +6,7 @@ const Author = require('./models/author');
 const Book = require('./models/book');
 const Chapter = require('./models/chapter');
 const Club = require('./models/club');
-const Comment = require('./models/comment');
-const Discussion = require('./models/discussion');
+const Thread = require('./models/thread');
 const Member = require('./models/member');
 const Genre = require('./models/genre');
 const Tag = require('./models/tag');
@@ -23,10 +22,8 @@ const genres = [];
 const tags = [];
 const books = [];
 const chapters = [];
-const comments = [];
 const clubs = [];
-const members = [];
-const discussions = [];
+const threads = [];
 
 const createAuthor = async (name, photoURL) => {
   try {
@@ -110,26 +107,26 @@ const createChapter = async (title, text, book) => {
   }
 };
 
-const createComment = async (name, text, book) => {
+const createThread = async (title, description, club, comments) => {
   try {
-    const comment = new Comment({
-      name,
-      comment: text,
-      book
+    const thread = new Thread({
+      title,
+      description,
+      club,
+      comments
     });
-    const result = await comment.save();
-    console.log('Comment has been created', result);
-    comments.push(result);
+    const result = await thread.save();
+    console.log('Thread has been created', result);
+    threads.push(result);
   } catch (err) {
     console.error(err);
   }
 };
 
-const createClub = async (name, book) => {
+const createClub = async (name) => {
   try {
     const club = new Club({
-      name,
-      book
+      name
     });
     const result = await club.save();
     console.log('Club has been created', result);
@@ -139,40 +136,24 @@ const createClub = async (name, book) => {
   }
 };
 
-const createMember = async (name, club) => {
-  try {
-    const member = new Member({
-      name,
-      club
-    });
-    const result = await member.save();
-    console.log('Member has been created', result);
-    members.push(result);
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-const createDiscussion = async (comment, club) => {
-  try {
-    const discussion = new Discussion({
-      comment,
-      club
-    });
-    const result = await discussion.save();
-    console.log('Discussions has been created', result);
-    discussions.push(result);
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 const createAuthors = async () => {
   await Promise.all([
-    createAuthor('nevz', 'https://picsum.photos/536/354'),
-    createAuthor('Alex', 'https://picsum.photos/536/354'),
-    createAuthor('Max', 'https://picsum.photos/536/354'),
-    createAuthor('Frank', 'https://picsum.photos/536/354')
+    createAuthor(
+      'nevz',
+      'https://cdn-icons-png.flaticon.com/512/1160/1160326.png?w=740'
+    ),
+    createAuthor(
+      'Bevan',
+      'https://cdn-icons-png.flaticon.com/512/1160/1160326.png?w=740'
+    ),
+    createAuthor(
+      'Stone',
+      'https://cdn-icons-png.flaticon.com/512/1160/1160326.png?w=740'
+    ),
+    createAuthor(
+      'Blair',
+      'https://cdn-icons-png.flaticon.com/512/1160/1160326.png?w=740'
+    )
   ]);
 };
 
@@ -180,9 +161,15 @@ const createGenres = async () => {
   await Promise.all([
     createGenre('Fantasy'),
     createGenre('Eastern'),
+    createGenre('Harem'),
+    createGenre('Shounen'),
+    createGenre('Romance'),
     createGenre('Modern'),
     createGenre('Action'),
     createGenre('Martial Arts'),
+    createGenre('Psychological'),
+    createGenre('Adventure'),
+    createGenre('Mystery'),
     createGenre('Tragedy'),
     createGenre('Mature'),
     createGenre('Xianxia'),
@@ -194,11 +181,22 @@ const createGenres = async () => {
 const createTags = async () => {
   await Promise.all([
     createTag('Game Elements'),
+    createTag('Anti Hero'),
     createTag('Calm Protagonist'),
+    createTag('Ruthless Protagonist'),
+    createTag('Orphans'),
+    createTag('Mind Control'),
+    createTag('Mercenaries'),
+    createTag('Merchants'),
+    createTag('Magical Beasts'),
     createTag('Male Protagonist'),
     createTag('Female Protagonist'),
     createTag('Weak to Strong'),
-    createTag('Roantic Subplot'),
+    createTag('Romantic Subplot'),
+    createTag('Soul Power'),
+    createTag('Spatial Manipulation'),
+    createTag('Time Skip'),
+    createTag('Trickster'),
     createTag('Pets'),
     createTag('Modern Day')
   ]);
@@ -208,7 +206,7 @@ const createBooks = async () => {
   await Promise.all([
     createBook(
       'Test Book 1',
-      'https://picsum.photos/536/354',
+      'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg',
       authors[0],
       10,
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
@@ -217,7 +215,7 @@ const createBooks = async () => {
     ),
     createBook(
       'Test Book 2',
-      'https://picsum.photos/536/354',
+      'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg',
       authors[1],
       30,
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
@@ -230,50 +228,38 @@ const createBooks = async () => {
 const createChapters = async () => {
   await Promise.all([
     createChapter(
-      'Test Chapter 1',
+      'Chapter 1',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       books[0]
     ),
     createChapter(
-      'Test Chapter 2',
+      'Chapter 2',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       books[0]
     ),
     createChapter(
-      'Another Test Chapter 1',
+      'Chapter 1',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       books[1]
     )
   ]);
 };
 
-const createComments = async () => {
+const createThreads = async () => {
   await Promise.all([
-    createComment('nevz', 'This is my book buy it pls', books[0]),
-    createComment('anon', 'This book sucks', books[0]),
-    createComment('i_love_novels', 'This is so great!', books[1])
+    createThread('About Chapter 1', 'Did you like it?', clubs[0], [
+      'No',
+      'Not really',
+      'Chapter 1 and it is already bad LOL'
+    ])
   ]);
 };
 
 const createClubs = async () => {
   await Promise.all([
-    createClub('Test Book 1 Fan Club', books[0]),
-    createClub('Test Book 1 Super Fans', books[0]),
-    createClub('Test Book 2 Club', books[1])
-  ]);
-};
-
-const createMembers = async () => {
-  await Promise.all([
-    createMember('nevz', clubs[0]),
-    createMember('book_enjoyer', clubs[0])
-  ]);
-};
-
-const createDiscussions = async () => {
-  await Promise.all([
-    createDiscussion('Im excited for the next chapter!', clubs[0]),
-    createDiscussion('So am I!', clubs[0])
+    createClub('Test Book 1 Fan Club'),
+    createClub('Test Book 1 Super Fans'),
+    createClub('Test Book 2 Club')
   ]);
 };
 
@@ -282,18 +268,16 @@ async.series(
     createAuthors,
     createGenres,
     createTags,
-    createBooks,
-    createChapters,
-    createComments,
     createClubs,
-    createMembers,
-    createDiscussions
+    createThreads,
+    createBooks,
+    createChapters
   ],
   (err, result) => {
     if (err) {
       console.error('Final:' + err);
     }
     console.log('Done');
-    mongoose.connection.close();
+    mongoose.disconnect();
   }
 );

@@ -18,7 +18,7 @@ exports.book_list_get = catchErr(async (req, res, next) => {
 });
 
 exports.book_detail_get = catchErr(async (req, res, next) => {
-  const book = await Book.findById(1)
+  const book = await Book.findById(req.params.bookId)
     .populate('author')
     .populate({ path: 'genre', limit: 3 })
     .populate({ path: 'tag', limit: 5 })

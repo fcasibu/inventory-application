@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const MemberSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A name is required'],
-    minLength: [3, 'A name must have a mininum length of 3 characters'],
-    maxLength: [25, 'A name must not exceed 25 characters']
+    required: true,
+    minLength: 3,
+    maxLength: 25
   },
   photoURL: {
     type: String

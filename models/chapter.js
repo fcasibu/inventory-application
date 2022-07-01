@@ -4,15 +4,15 @@ const { DateTime } = require('luxon');
 const ChapterSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'A title is required'],
-    minLength: [3, 'A title must have a mininum length of 3 characters'],
-    maxLength: [50, 'A title must not exceed 50 characters']
+    required: true,
+    minLength: 3,
+    maxLength: 50
   },
   text: {
     type: String,
-    required: [true, 'A text is reuired'],
-    minLength: [10, 'A text must have a minimum length of 10 characters'],
-    maxLength: [6000, 'A text must not exceed 6000 characters']
+    required: true,
+    minLength: 10,
+    maxLength: 6000
   },
   book: {
     type: mongoose.Schema.Types.ObjectId,
